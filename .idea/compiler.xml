@@ -9,7 +9,7 @@
         <module name="EDIEnvelopeAutoBuilderWeb" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="EDIEnvelopeAutoBuilderWeb" target="1.5" />
     </bytecodeTargetLevel>
   </component>
