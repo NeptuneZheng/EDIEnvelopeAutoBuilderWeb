@@ -1,22 +1,12 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
     <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <script language="JavaScript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
 </head>
 <body>
-<!--
-<script>$(document).ready(function(c) {
-	$('.close').on('click', function(c){
-		$('.login-form').fadeOut('slow', function(c){
-	  		$('.login-form').remove();
-		});
-	});
-});
-</script>
--->
 <!--SIGN UP-->
 <h1>Welcome To B2B Toolbox</h1>
 <div class="login-form">
@@ -31,18 +21,34 @@
         <img src="images\avtar.png"/>
     </div>
     <form>
-        <input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+        <input type="text" class="text" id="Username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
         <div class="key">
-            <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+            <input type="password" id="Password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
         </div>
     </form>
     <div class="signin">
-        <input type="submit" value="Login" >
+        <input type="submit" value="Login" ID="login-button">
     </div>
 </div>
 <div class="copy-rights">
     <p>Copyright &copy; 2017 tool intergration by <b>Neptune</b> & <b>Tracy</b></p>
 </div>
 
+<script type="text/javascript">
+    $("#login-button").click(function () {
+        var username = document.getElementById("Username").value;
+        var password = document.getElementById("Password").value;
+        $.get("loginVerify", {username: username, password: password},
+            function (data) {
+                if (data == "register") {
+                    window.location.href = "register.html";
+                } else if (data == "false") {
+                    alert("Permission denied, pls check your username or password !");
+                } else if (data == "true") {
+                    window.location.href = "main.html";
+                }
+            });
+    });
+</script>
 </body>
 </html>
