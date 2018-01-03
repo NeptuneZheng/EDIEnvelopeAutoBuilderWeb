@@ -1,0 +1,18 @@
+#header_area {
+    background: #231f20;
+    width: 100%;
+}
+
+.col-md-12,
+.container,
+.row {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.header_a {
+    color: #FFFFFF;
+    font-size: 21px;
+}

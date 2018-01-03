@@ -2,10 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main</title>
+    <link rel="shortcut icon" href="images\title.ico" type="image/x-icon"/>
+    <link href="css/title.css" rel='stylesheet' type='text/css'/>
+    <link href="css/main_body.css" rel='stylesheet' type='text/css'/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<p>HTML5 Hello ~</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="header_area">
+            <div class="col-md-3">
+            <img src="images/B2BLogo.jpg" alt="B2B" style="margin-left: 20%;height: 100px;width: 100px">
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
+            <nav class="navbar navbar-inverse" style="margin-top: 8%">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#" class="header_a">Main</a></li>
+                <li><a href="#" class="header_a">Back</a></li>
+                <li><a href="login.html" class="header_a">Logout</a></li>
+            </ul>
+            </nav>
+            </div>
+        </div>
+        <div class="col-md-12" style="margin: 10px 0">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="gray_content_area">
+                        <div class="content_holder center_content">
+                            <h2 class="text-center">Our Products</h2>
+                            <div class="product_holder">
+                                <div class="product_column pull-left text-center">
+                                    <h4>Auto Header Generate</h4>
+                                    <div class="product_icon"><img src="images\Auto_generate.jpg" alt="Auto_generate.jpg" ></div>
+                                    <p>Outgoing 2.0 EDI header generate,<br> IG/Script/commonUtil/javaBean,<br>contribute by Tracy and Neptune.</p>
+                                    <div class="product_btm">
+                                        <strong><a href="autoHeaderGenerate.html">Enter</a></strong>
+                                    </div>
+                                </div>
+                                <div class="product_column pull-right text-center">
+                                    <h4>Data Analysis</h4>
+                                    <div class="product_icon"><img src="images\Data_analysis.jpg" alt="Data_analysis.jpg"></div>
+                                    <p>Intelligent recommendation modle TP,<br>for new tp setup use.</p>
+                                    <small>*Looking for your join in !</small>
+                                    <div class="product_btm">
+                                        <strong>Enter</strong>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="col-md-12"></div>
+        <div class="col-md-12"></div>
+    </div>
+</div>
 
 </body>
 </html>

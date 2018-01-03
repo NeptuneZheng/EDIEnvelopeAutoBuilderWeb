@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Header Generate</title>
+    <link rel="shortcut icon" href="images\title.ico" type="image/x-icon"/>
+    <link href="css/title.css" rel='stylesheet' type='text/css'/>
+    <link href="css/main_body.css" rel='stylesheet' type='text/css'/>
+    <link href="css/layui.css" rel='stylesheet' type='text/css'/>
+    <link href="css/headerGenerate.css" rel='stylesheet' type='text/css'/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../../layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="header_area">
+            <div class="col-md-3">
+                <img src="images/B2BLogo.jpg" alt="B2B" style="margin-left: 20%;height: 100px;width: 100px">
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
+                <nav class="navbar navbar-inverse" style="margin-top: 8%">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#" class="header_a">Main</a></li>
+                        <li><a href="#" class="header_a">Back</a></li>
+                        <li><a href="login.html" class="header_a">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top: 50px !important;">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                <div class="col-md-12">
+                    <form class="form-type form-horizontal">
+                        <div id="legend" class="">
+                            <legend style="size: 26px;font-style: italic;font-weight: bold;">Auto Header Generate</legend>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <label for="inputTPID" class="col-sm-2 control-label">TP_ID</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputTPID" placeholder="" style="width: 250px">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <label for="inputReplacementChar" class="col-sm-2 control-label">ReplacementChar</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputReplacementChar" placeholder="|" style="width: 250px">
+                                <p class="help-block" style="color: lightslategrey;">select * from b2b_char_convert ch where ch.tp_id =?</p>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <label for="inputIGDefination" class="col-sm-2 control-label">IGDefination</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputIGDefination" placeholder="CUS_4010_315_CS.xml" style="width: 250px">
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <label for="inputFilePath" class="col-sm-2 control-label">InputFilePath</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputFilePath" placeholder="D:\kukri_sql\EDI\" style="width: 250px">
+                                <p class="help-block" style="color: lightslategrey">pls mkdir D:\kukri_sql\EDI\ folder path first!</p>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <label class="col-sm-2 control-label">Formate</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" style="width: 250px">
+                                    <option>X.12</option>
+                                    <option>EDIFACT</option>
+                                    <option>XML</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <label class="col-sm-2 control-label">MessageType</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" style="width: 250px">
+                                    <option>CT</option>
+                                    <option>BC</option>
+                                    <option>BL</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <label class="col-sm-2 control-label">DBEnviroment</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" style="width: 250px">
+                                    <option>QA3</option>
+                                    <option>QA4</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-7">
+                                <button type="button" class="btn btn-info" style="width: 100%">Generate IG</button>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="col-sm-12">
+                        <textarea placeholder="Sever operation details..." readonly="readonly" class="text-area">
+                        </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+                <div class="col-md-7">
+                    <div class="form-group" style="margin-top: 50px !important;">
+                        <label class="col-sm-2 control-label">Mapping Script</label>
+                        <div class="col-sm-10">
+                            <div class="layui-upload">
+                                <div class="form-inline">
+                                    <button type="button" class="btn btn-primary" id="testList">Browse</button>
+                                    <button type="button" class="btn btn-info" id="testListAction">Upload</button>
+                                </div>
+                                <div class="layui-upload-list" style="height:400px; overflow:scroll;">
+                                    <table class="layui-table">
+                                        <thead>
+                                        <tr><th>File Name</th>
+                                            <th>Size</th>
+                                            <th>Status</th>
+                                            <th>Retry</th>
+                                            <th>Remove</th>
+                                        </tr></thead>
+                                        <tbody id="demoList"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-info" style="float: left;width: 250px">Generate Script</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12"></div>
+        <div class="col-md-12"></div>
+    </div>
+</div>
+<script>
+    layui.use('upload', function(){
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        var demoListView = $('#demoList')
+            ,uploadListIns = upload.render({
+        elem: '#testList'
+        ,url: '/upload/'
+        ,accept: 'file'
+        ,multiple: true
+        ,auto: false
+        ,bindAction: '#testListAction'
+        ,choose: function(obj){
+            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //读取本地文件
+            obj.preview(function(index, file, result){
+                var tr = $(['<tr id="upload-'+ index +'">'
+                    ,'<td>'+ file.name +'</td>'
+                    ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                    ,'<td>Waitting for upload </td>'
+                    ,'<td>'
+                    ,'<button class="layui-btn layui-btn-mini demo-reload layui-hide">Retry</button>'
+                    ,'</td>'
+                    ,'<td>'
+                    ,'<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">Remove</button>'
+                    ,'</td>'
+                    ,'</tr>'].join(''));
+
+                //单个重传
+                tr.find('.demo-reload').on('click', function(){
+                    obj.upload(index, file);
+                });
+
+                //删除
+                tr.find('.demo-delete').on('click', function(){
+                    delete files[index]; //删除对应的文件
+                    tr.remove();
+                    uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                });
+
+                demoListView.append(tr);
+            });
+        }
+        ,done: function(res, index, upload){
+            if(res.code == 0){ //上传成功
+                var tr = demoListView.find('tr#upload-'+ index)
+                    ,tds = tr.children();
+                tds.eq(2).html('<span style="color: #5FB878;">Sucess</span>');
+                tds.eq(3).html(''); //清空操作
+                return delete this.files[index]; //删除文件队列已经上传成功的文件
+            }
+            this.error(index, upload);
+        }
+        ,error: function(index, upload){
+            var tr = demoListView.find('tr#upload-'+ index)
+                ,tds = tr.children();
+            tds.eq(2).html('<span style="color: #FF5722;">Fail</span>');
+            tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+        }
+    });
+    });
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@
     <!--<mvc:resources mapping="/resources/**" location="/resources/"/>-->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/layui/**" location="/layui/"/>
 
     <!-- HandlerMapping -->
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
