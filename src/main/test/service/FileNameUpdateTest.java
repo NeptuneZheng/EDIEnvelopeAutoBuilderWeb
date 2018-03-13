@@ -7,7 +7,7 @@ import junit.framework.TestCase;
  */
 public class FileNameUpdateTest extends TestCase {
     public void testUpdateFileName() throws Exception {
-        FileNameUpdate.updateFileName("D:\\1_B2BEDI_Revamp\\CT\\OUT_315\\TARGET");
+        FileNameUpdate.updateFileName("D:\\My Documents\\MyJabberFiles\\XIAOTR@oocl.com\\RICOH");
     }
 
 }
