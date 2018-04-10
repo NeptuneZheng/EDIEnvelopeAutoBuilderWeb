@@ -98,9 +98,13 @@ public class FileDistribution {
         String key = "";
         boolean updateFlag = true;
         for(File file : fis.listFiles()){
+            int date = 0;
+            if(file.isFile()){
+                date = Integer.parseInt(file.getName().substring(9,11));
+            }
             if(file.isDirectory()){
                 System.out.println("Can't distribute file folder !");
-            }else if(file.isFile()){
+            }else if(file.isFile() && date > 11){
                 String inputFileName = file.getName();
                 String newName =index+"_"+file.getName().substring(0,22)+".edi";
                 try {
@@ -128,7 +132,7 @@ public class FileDistribution {
                     try {
                         bufferedReader.close();
                         if(updateFlag && map.get(key) != null){
-                            final boolean b = file.renameTo(new File(file.getPath().replaceAll(inputFileName,newName)));
+                            final boolean b = file.renameTo(new File(file.getPath().replaceAll(inputFileName,"input/"+newName)));
                             if(b){
                                 index ++;
                                 System.out.println("Name Updated Sucess From "+inputFileName+"---------->"+newName+"************* CSBookingRefNumber: "+key);

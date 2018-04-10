@@ -102,9 +102,9 @@ public class ShowFile {
             }else if(file.isFile()){
                 String inputFileName = file.getName();
 //                System.out.println("File Name : "+inputFileName+"*****");
-                if(line == 0){
-                    System.out.println("File Name : "+inputFileName+"*****");
-                }
+//                if(line == 0){
+//                    System.out.println("File Name : "+inputFileName+"*****");
+//                }
                 try {
                     bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
                     String lineTxt = null;
@@ -113,8 +113,8 @@ public class ShowFile {
                             String sub = lineTxt.substring(start,start+len);
                             if(line==0){
                                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~"+lineTxt);
-                            }else if(count == line ){
-//                            }else if(count == line && !sub.trim().equals("") && sub.trim().length()>24 ){
+//                            }else if(count == line ){
+                            }else if(count == line && !sub.trim().equals("") && sub.trim().equals("FI") ){
                                 //&& sub.trim().equals("DSP")  && !sub.trim().equals("")
                                 if(start>=0){
                                     System.out.println(count+"-File Name : "+inputFileName+"/***/~~~~~~~~~~~~~~~~~~~~"+sub);

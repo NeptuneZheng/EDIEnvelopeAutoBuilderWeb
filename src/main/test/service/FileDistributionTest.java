@@ -11,8 +11,7 @@ public class FileDistributionTest {
 
     @Test
     public void getInputFileName() throws Exception {
-        fd.getInputFileNameAndCSBookingRefNumber("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018\\TEST\\input");
-
+        fd.getInputFileNameAndCSBookingRefNumber("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\TT\\input");
     }
 
 }
