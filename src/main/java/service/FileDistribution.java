@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class FileDistribution {
+
     public void distributeFile(String sourcePath_input, String sourcePath_output){
         BufferedReader bufferedReader = null;
         File fis = new File(sourcePath_output);
@@ -98,13 +99,13 @@ public class FileDistribution {
         String key = "";
         boolean updateFlag = true;
         for(File file : fis.listFiles()){
-            int date = 0;
-            if(file.isFile()){
-                date = Integer.parseInt(file.getName().substring(9,11));
-            }
+//            int date = 0;
+//            if(file.isFile()){
+//                date = Integer.parseInt(file.getName().substring(9,11));
+//            }
             if(file.isDirectory()){
                 System.out.println("Can't distribute file folder !");
-            }else if(file.isFile() && date > 11){
+            }else if(file.isFile()){
                 String inputFileName = file.getName();
                 String newName =index+"_"+file.getName().substring(0,22)+".edi";
                 try {
@@ -141,7 +142,7 @@ public class FileDistribution {
                                 System.exit(1);
                             }
                         }else if(!updateFlag && map.get(key) != null){
-                            File file1 = new File((file.getParent()+"/"+map.get(key)));
+                            File file1 = new File((file.getParent()+"/input/"+map.get(key)));
                             final boolean b = file1.renameTo(new File(file1.getPath()+"_D"));
                             if(b){
                                 index ++;
@@ -165,6 +166,42 @@ public class FileDistribution {
         mapToJsonAndSave(map);
     }
 
+    public void selectReleatedFile(String source, String result){
+        File file_s = new File(source);
+        File file_r = new File(result);
+        //for loop, out large, inner small
+        if(file_s.listFiles().length < file_r.listFiles().length){
+            File poker = file_s;
+            file_s = file_r;
+            file_r = poker;
+        }
+        for(File f: file_s.listFiles()){
+            if(f.isDirectory()){
+                System.out.println("Can't distribute file folder1 !");
+            }else {
+                String s_file_name = f.getName();
+                for(File f1: file_r.listFiles()){
+                    if(f.isDirectory()){
+                        System.out.println("Can't distribute file folder2 !");
+                        continue;
+                    }else {
+                        String r_file_name = f1.getName();
+                        if(r_file_name.equals(s_file_name)){
+                            final boolean a = f.renameTo(new File(f.getPath().replaceAll(s_file_name,"Select/"+s_file_name)));
+                            final boolean b = f1.renameTo(new File(f1.getPath().replaceAll(r_file_name,"Select/"+r_file_name)));
+                            if(a && b){
+                                System.out.println("Select sucess ~"+"***********"+s_file_name);
+                                System.out.println("Select sucess ~"+"***********"+r_file_name);
+                            }else{
+                                System.out.println("Select fail ~"+"-----------"+s_file_name);
+                                System.out.println("Select fail ~"+"-----------"+r_file_name);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     public File findRelatedOFileName(File file[], String fileName_start){
         File result = null;
         for(File f : file){

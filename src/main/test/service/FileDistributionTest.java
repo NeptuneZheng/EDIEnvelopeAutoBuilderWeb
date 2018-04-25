@@ -6,12 +6,16 @@ public class FileDistributionTest {
     FileDistribution fd = new FileDistribution();
     @Test
     public void distributeFile() throws Exception {
-        fd.distributeFile("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018\\TEST\\input","D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018\\TEST\\output");
+        fd.distributeFile("D:\\Data\\output","D:\\Data\\output");
     }
 
     @Test
     public void getInputFileName() throws Exception {
-        fd.getInputFileNameAndCSBookingRefNumber("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\TT\\input");
+        fd.getInputFileNameAndCSBookingRefNumber("C:\\Users\\ZHENGNE\\Desktop\\1~\\input");
     }
 
+    @Test
+    public void selectReleatedFile() throws Exception {
+        fd.selectReleatedFile("D:\\Data\\input\\input","D:\\Data\\output\\UIF");
+    }
 }

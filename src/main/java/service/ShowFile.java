@@ -108,13 +108,15 @@ public class ShowFile {
                 try {
                     bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
                     String lineTxt = null;
+                    int c = 0;
                     while ((lineTxt = bufferedReader.readLine()) != null) {
                         if(lineTxt.startsWith(prefix)){
                             String sub = lineTxt.substring(start,start+len);
+                            c++;
                             if(line==0){
-                                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~"+lineTxt);
-//                            }else if(count == line ){
-                            }else if(count == line && !sub.trim().equals("") && sub.trim().equals("FI") ){
+                                System.out.println(inputFileName+"~~~~~~~~~~~~~~~~~~~~~~~~~"+lineTxt);
+//                            }else if(count == line )&& (sub.trim().equals("CC4533431588")){|| sub.trim().equals("70CC4744527211")  || sub.trim().equals("CC6535871040") || sub.trim().equals("CC5779454661") || sub.trim().equals("CC5313044290")
+                            }else if(count == line && !sub.trim().equals("")){
                                 //&& sub.trim().equals("DSP")  && !sub.trim().equals("")
                                 if(start>=0){
                                     System.out.println(count+"-File Name : "+inputFileName+"/***/~~~~~~~~~~~~~~~~~~~~"+sub);
