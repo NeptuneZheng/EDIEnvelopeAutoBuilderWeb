@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.BRMigrationFileSystem;
 import pojo.IDCollection;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -222,7 +223,7 @@ public class BRMigrationFileHandler {
         idDao.updateMaxId(new IDCollection("BRMig",start_idx));
     }
 
-    public void selectFile(String dataPath,List<String> file_name_list){
+    public void selectFile(String dataPath,List<String> file_name_list) {
         File file_s = new File(dataPath);
         if(file_name_list.size() > 0){
             File out_folder = new File(dataPath + "/" + new Date().getMinutes() + "min_Select");
@@ -234,12 +235,19 @@ public class BRMigrationFileHandler {
                     String s_file_name = f.getName();
                     for(String r_file_name: file_name_list){
                         if(r_file_name.equals(s_file_name)){
-                            final boolean a = f.renameTo(new File(f.getPath().replaceAll(s_file_name,out_folder.getName()+"/"+s_file_name)));
-                            if(a){
+                            try {
+                                FileUtils.copyFile(f,new File(f.getPath().replaceAll(s_file_name,out_folder.getName()+"/"+s_file_name)));
                                 System.out.println("Select sucess ~"+"***********"+s_file_name);
-                            }else{
+                            } catch (IOException e) {
                                 System.out.println("Select fail ~"+"-----------"+s_file_name);
+                                e.printStackTrace();
                             }
+//                            final boolean a = f.renameTo(new File(f.getPath().replaceAll(s_file_name,out_folder.getName()+"/"+s_file_name)));
+//                            if(a){
+//
+//                            }else{
+//
+//                            }
                         }
                     }
                 }
@@ -265,6 +273,7 @@ public class BRMigrationFileHandler {
 
     public void selectDataSet(String folderPath,List<String> file_name_list){
         File folder = new File(folderPath);
+        long start = System.nanoTime();
         for(File f : folder.listFiles()){
             if(f.isDirectory()){
                 selectFile(f.getPath(),file_name_list);
@@ -272,5 +281,10 @@ public class BRMigrationFileHandler {
                 selectFile(folderPath,file_name_list);
             }
         }
+        long end = System.nanoTime();
+
+        System.out.println("***************************************************************************");
+        System.out.println("Total time of use for data set copy: " + ((end - start)/Math.pow(10,9)) + "s" );
+        System.out.println("******************************* END ***************************************");
     }
 }
