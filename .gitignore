@@ -2,3 +2,7 @@
 bower_components/
 target/
 node_modules/
+.idea/workspace.xml
+.idea/workspace.xml
+EDIEnvelopeAutoBuilderWeb.iml
+pom.xml

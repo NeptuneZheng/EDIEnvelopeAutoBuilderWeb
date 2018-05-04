@@ -19,7 +19,7 @@ public class BRMigrationFileHandleServiceImplTest {
 
     @Test
     public void saveNewRecord() throws Exception {
-        BRMigrationFileSystem br = new BRMigrationFileSystem("3.txt","2_1.edi","CC1111","aaa","bbb","20180412",new Date(),new Date(),"F","T");
+        BRMigrationFileSystem br = new BRMigrationFileSystem("3.txt","2_1.edi","CC1111","aaa","bbb","20180412","UPD",new Date(),new Date(),"F","T");
         br.setId(1);
         brImp.saveNewRecord(br);
     }

@@ -32,12 +32,22 @@ public class BRMigrationDaoImpl implements BRMigrationDao {
         return mongoTemplate.findAndRemove(new Query(Criteria.where("_id").is(idx)),BRMigrationFileSystem.class);
     }
 
-    public BRMigrationFileSystem findOneBRDataRecord(String csBookingNum) {
+    public BRMigrationFileSystem findOneBRDataRecordBycsBookingNumAndActionType(String csBookingNum, String actionType) {
+        BRMigrationFileSystem br =null;
+        try{
+            br = mongoTemplate.findOne(new Query(Criteria.where("csBookingRefNumber").is(csBookingNum).andOperator(Criteria.where("Action_type").is(actionType))),BRMigrationFileSystem.class);
+        }catch (Exception e){
+            System.out.println("findOneBRDataRecordBycsBookingNumAndActionType Exception");
+        }
+        return br;
+    }
+
+    public BRMigrationFileSystem findOneBRDataRecordBycsBookingNum(String csBookingNum) {
         BRMigrationFileSystem br =null;
         try{
             br = mongoTemplate.findOne(new Query(Criteria.where("csBookingRefNumber").is(csBookingNum)),BRMigrationFileSystem.class);
         }catch (Exception e){
-            System.out.println("findOneBRDataRecord Exception");
+            System.out.println("findOneBRDataRecordBycsBookingNum Exception");
         }
         return br;
     }

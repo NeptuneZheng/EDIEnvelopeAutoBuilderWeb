@@ -19,6 +19,7 @@ public class BRMigrationFileSystem {
     private String Prod_UIF_name;
     private String Prod_EDI_name;
     private String Data_version;
+    private String Action_type;
     @CreatedDate
     @DateTimeFormat(style = "yyyy-MMdd-HH:mm:SS")
     private Date Create_date;
@@ -31,13 +32,14 @@ public class BRMigrationFileSystem {
     public BRMigrationFileSystem() {
     }
 
-    public BRMigrationFileSystem( String o_input_file_name, String n_input_file_name, String csBookingRefNumber, String prod_UIF_name, String prod_EDI_name, String data_version, Date create_date, Date update_date, String duplicate_flag, String match_flag) {
+    public BRMigrationFileSystem( String o_input_file_name, String n_input_file_name, String csBookingRefNumber, String prod_UIF_name, String prod_EDI_name, String data_version, String action_type, Date create_date, Date update_date, String duplicate_flag, String match_flag) {
         O_input_file_name = o_input_file_name;
         N_input_file_name = n_input_file_name;
         this.csBookingRefNumber = csBookingRefNumber;
         Prod_UIF_name = prod_UIF_name;
         Prod_EDI_name = prod_EDI_name;
         Data_version = data_version;
+        Action_type = action_type;
         Create_date = create_date;
         Update_date = update_date;
         Duplicate_flag = duplicate_flag;
@@ -98,6 +100,14 @@ public class BRMigrationFileSystem {
 
     public void setData_version(String data_version) {
         Data_version = data_version;
+    }
+
+    public String getAction_type() {
+        return Action_type;
+    }
+
+    public void setAction_type(String action_type) {
+        Action_type = action_type;
     }
 
     public Date getCreate_date() {

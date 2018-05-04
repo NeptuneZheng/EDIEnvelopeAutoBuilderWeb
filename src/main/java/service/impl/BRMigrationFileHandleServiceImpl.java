@@ -23,7 +23,7 @@ public class BRMigrationFileHandleServiceImpl {
     public BRMigrationFileSystem findOneBRDataRecord(String csBookingNum) {
         BRMigrationFileSystem br =null;
         try{
-            br = brMigrationDao.findOneBRDataRecord(csBookingNum);
+            br = brMigrationDao.findOneBRDataRecordBycsBookingNum(csBookingNum);
         }catch (Exception e){
             System.out.println("findOneBRDataRecord Exception");
         }

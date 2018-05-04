@@ -15,7 +15,7 @@ public class BRMigrationFileHandlerTest {
     }
     @Test
     public void distributeFileAndRecord() throws Exception {
-        brHan.distributeFileAndRecord("D:\\Data\\Test\\I","D:\\Data\\Test\\O","COSU","20180416");
+        brHan.distributeFileAndRecord("D:\\Data\\Test\\I","D:\\Data\\Test\\O","COSU","20180502");
     }
 
     @Test
