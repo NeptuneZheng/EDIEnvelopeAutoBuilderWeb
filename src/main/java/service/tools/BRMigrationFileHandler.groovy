@@ -2,6 +2,7 @@ package service.tools
 
 import dao.BRMigrationDao
 import dao.IDCollectionDao
+import hadoop.util.HadoopUtil
 import org.apache.commons.io.FileUtils
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +17,7 @@ import pojo.IDCollection
 public class BRMigrationFileHandler {
     private final BRMigrationDao brDao;
     private final IDCollectionDao idDao;
+    private static hadoop_data_center_path = '/usr/local/hadoop/tmp/dfs/data/Carrier BR/'
     public static Logger logger = Logger.getLogger(BRMigrationFileHandler.class);
 
     @Autowired
@@ -68,6 +70,7 @@ public class BRMigrationFileHandler {
                 logger.info("Can't distribute file folder !")
             } else if (file.isFile()) {
                 String output = outputPath;
+                String sub_hadoop_path = ''
                 System.out.println(file.getName());
                 String oldName = file.getName();
                 // gen new name for all data, data_version format suggest use 'yyyyMMdd'
@@ -95,9 +98,10 @@ public class BRMigrationFileHandler {
                                 prime = "N9*ZZ*";
                                 prime_a = "B1*";
                                 replacer = ".*N9\\*ZZ\\*";
-                                replacer_a = "(.*B1(.*?\\*){4})|~.*";
+                                replacer_a = "(.*B1\\*(.*?\\*){3})|~.*";
                                 msg_type = "EDI";
                                 output += "/O_EDI/";
+                                sub_hadoop_path += "O_EDI/";
                             } else if (lineTxt.startsWith("<?xml")) {
                                 prime = "<CSBookingRefNumber>";
                                 prime_a = "<ActionType>";
@@ -105,6 +109,7 @@ public class BRMigrationFileHandler {
                                 replacer_a = "<ActionType>|</ActionType>";
                                 msg_type = "XML";
                                 output += "/O_XML/";
+                                sub_hadoop_path += "O_XML/";
                             } else if (lineTxt.length() > 0) {
                                 prime = "EXTERNAL REF   70";
                                 prime_a = "ACTION         ";
@@ -112,6 +117,7 @@ public class BRMigrationFileHandler {
                                 replacer_a = "ACTION         ";
                                 msg_type = "UIF";
                                 output += "/O_UIF/";
+                                sub_hadoop_path += "O_UIF/";
                             }
                             idx++;
                         }
@@ -140,7 +146,7 @@ public class BRMigrationFileHandler {
                         if (bufferedReader != null) {
                             bufferedReader.close();
                         }
-                        if (!csBookingNum.equals("")) {
+                        if (!csBookingNum.equals("") || (csBookingNum.equals("") && actionType == "CAN")) {
                             // select DB to decide if should insert or update
                             String file_update_name = "";
                             BRMigrationFileSystem brObj = brDao.findOneBRDataRecordBycsBookingNumAndActionType(csBookingNum,actionType);
@@ -227,6 +233,8 @@ public class BRMigrationFileHandler {
                             // update file name to new file name
                             final boolean a = file.renameTo(new File(output + newName));
                             if (a) {
+                                //add to hadoop data center
+                                HadoopUtil.UPLOAD(output + newName,hadoop_data_center_path+sub_hadoop_path+newName)
                                 // insert or update record
                                 brDao.saveNewRecord(brObj);
                                 if (idx_add_flag) {
@@ -235,7 +243,7 @@ public class BRMigrationFileHandler {
                                 logger.info("Name Updated Sucess From " + oldName + "###" + oldName + "---------->" + newName)
 //                                System.out.println("Name Updated Sucess From " + oldName + "###" + oldName + "---------->" + newName);
                             } else {
-                                logger.warn("Name Updated Fail !!!   ::" + oldName)
+                                logger.warn("Name Updated Fail !!!   ::" + oldName + " to new name: :" + newName)
 //                                System.out.println("Name Updated Fail !!!   ::" + oldName);
                                 System.exit(1);
                             }
@@ -295,7 +303,8 @@ public class BRMigrationFileHandler {
     }
 
     public List<BRMigrationFileSystem> GET_NONE_DUPLICATE_AND_MATCHED_LIST(String dataVersion) {
-        return brDao.findMatchButNotDuplicateRecord(dataVersion);
+//        return brDao.findMatchButNotDuplicateRecord(dataVersion);
+        return brDao.findDuplicateBRDateRecordByDuplicateFlag('N');
     }
 
     public void selectDataSet(String folderPath, List<String> file_name_list) {
@@ -313,5 +322,34 @@ public class BRMigrationFileHandler {
         logger.info("***************************************************************************")
         logger.info("Total time of use for data set copy: " + ((end - start) / Math.pow(10, 9)) + "s")
         logger.info("***************************************************************************")
+    }
+
+    public void downloadDataSetByHadoop(String hadoop_folderPath, boolean pathappend, List<String> file_name_list, String des_path) {
+        if(!des_path){
+          logger.error("downloadDataSetByHadoop not provide destination path.")
+        }else{
+            String real_path = ''
+            if(hadoop_folderPath && pathappend){
+                real_path = (hadoop_data_center_path + hadoop_folderPath).replaceAll('//','/')
+            }else if(hadoop_folderPath){
+                real_path = hadoop_folderPath
+            }else {
+                real_path = hadoop_data_center_path
+                logger.warn("downloadDataSetByHadoop use system default data center path: "+hadoop_data_center_path)
+            }
+            File folder = new File(des_path);
+            folder.mkdirs()
+
+            long start = System.nanoTime();
+            for (String name : file_name_list) {
+//                real_path += '/' + name
+               HadoopUtil.DOWNLOAD_DATA((real_path + '/' + name).replaceAll('//','/'),des_path + '/'+name)
+            }
+            long end = System.nanoTime();
+
+            logger.info("***************************************************************************")
+            logger.info("Total time of use for data set copy: " + ((end - start) / Math.pow(10, 9)) + "s")
+            logger.info("***************************************************************************")
+        }
     }
 }

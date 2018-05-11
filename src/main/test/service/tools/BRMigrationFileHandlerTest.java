@@ -15,7 +15,7 @@ public class BRMigrationFileHandlerTest {
     }
     @Test
     public void distributeFileAndRecord() throws Exception {
-        brHan.distributeFileAndRecord("D:\\Data\\Test\\I","D:\\Data\\Test\\O","COSU","20180502");
+        brHan.distributeFileAndRecord("D:\\Data\\Test\\I","D:\\Data\\Test\\O","COSU","20180504Online");
     }
 
     @Test
@@ -23,7 +23,8 @@ public class BRMigrationFileHandlerTest {
 //        brHan.GET_NONE_DUPLICATE_AND_MATCHED_LIST("20180416");
 //        brHan.getSelectedFileNameList(brHan.GET_NONE_DUPLICATE_AND_MATCHED_LIST("20180416"));
 //        brHan.selectFile("D:\\Data\\Test\\O\\O_EDI",brHan.getSelectedFileNameList(brHan.GET_NONE_DUPLICATE_AND_MATCHED_LIST("20180416")));
-        brHan.selectDataSet("D:\\Data\\Test\\O",brHan.getSelectedFileNameList(brHan.GET_NONE_DUPLICATE_AND_MATCHED_LIST("20180416")));
+//        brHan.selectDataSet("D:\\Data\\Test\\O",brHan.getSelectedFileNameList(brHan.GET_NONE_DUPLICATE_AND_MATCHED_LIST("20180504")));
+        brHan.downloadDataSetByHadoop("/usr/local/hadoop/tmp/dfs/data/Carrier BR/O_EDI",false,brHan.getSelectedFileNameList(brHan.GET_NONE_DUPLICATE_AND_MATCHED_LIST("20180504")),"D:\\Data\\Test\\T\\H\\EDI");
     }
 
 }
