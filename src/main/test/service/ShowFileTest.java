@@ -32,7 +32,7 @@ public class ShowFileTest {
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\UIF","DANGEROUS",1,1324,180);
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\Else","DANGEROUS",1,1324,180);
         //
-        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\300(1)\\300","REMARKS        01 EXTVOY:",1,0,50);
+        showFile.showAllFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\OUT_UIF\\COSU_UIF\\ExpectedComplete","REMARKS        011st vessel:",2,0,28);
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\youal@oocl.com","O/B DOOR",0,1,25);
     }
 

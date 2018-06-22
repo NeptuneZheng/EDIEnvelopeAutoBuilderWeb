@@ -24,6 +24,7 @@ public class BRMigrationDaoImpl implements BRMigrationDao {
             mongoTemplate.save(br);
             return true;
         }catch (Exception e){
+            e.printStackTrace();
             return false;
         }
     }
@@ -36,10 +37,11 @@ public class BRMigrationDaoImpl implements BRMigrationDao {
         BRMigrationFileSystem br =null;
         try{
             br = mongoTemplate.findOne(new Query(Criteria.where("csBookingRefNumber").is(csBookingNum).andOperator(Criteria.where("Action_type").is(actionType))),BRMigrationFileSystem.class);
-        }catch (Exception e){
+        } catch (Exception e){
             System.out.println("findOneBRDataRecordBycsBookingNumAndActionType Exception");
+        }finally {
+            return br;
         }
-        return br;
     }
 
     public BRMigrationFileSystem findOneBRDataRecordBycsBookingNum(String csBookingNum) {

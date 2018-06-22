@@ -47,8 +47,9 @@ public class BuildSQL {
                         }
                     }
                     line_idx1++;
+                    System.out.println(line_idx1);
                 }
-                System.out.println(line_idx1);
+                System.out.println("---------------Total: " + line_idx1);
 
                 fw = new FileWriter(result_fis, false);
                 bw = new BufferedWriter(fw);
