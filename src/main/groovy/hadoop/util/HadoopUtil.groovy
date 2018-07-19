@@ -11,7 +11,7 @@ import org.apache.log4j.Logger
 class HadoopUtil {
     private static Logger hlogger = Logger.getLogger(HadoopUtil.class)
 
-    public static final String HADOOP_PATH = "hdfs://192.168.47.128:9000";
+    public static final String HADOOP_PATH = "hdfs://192.168.47.129:9000";
     public static String data_center_path = "/usr/local/hadoop/tmp/dfs/data/"
     private static Configuration cnf = new Configuration()
     private static FileSystem fs = FileSystem.get(new URI(HADOOP_PATH),cnf)

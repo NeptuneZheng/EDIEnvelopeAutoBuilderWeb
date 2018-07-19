@@ -18,22 +18,13 @@ public class ShowFileTest {
 
     @Test
     public void showAllFileByPrefixAndLineAndPosition() throws Exception{
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\OUT_UIF\\COSU\\ExpectedComplete","SHIPMENT",1,15,17);
-        //OBAPPOINTMENTADDRESS
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\UIF","APPOINTMENT",1,15,120);
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\Else","APPOINTMENT",1,15,120);
-//        //all file of BU_IBDOOR_HAULAGE output Y
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\UIF","I/B DOOR",1,525,1);
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\Else","I/B DOOR",1,525,1);
-        //all prod data of CARGOWEIGHT is 00000000
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\UIF","CARGO",1,127,9);
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\Else","CARGO",1,127,9);
-        //BU_DANGEROUS_FINAL_SHIPNME
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\UIF","DANGEROUS",1,1324,180);
-//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\luilo@oocl.com\\BR_6Jan_16Jan2018_1\\TEST\\output\\Else","DANGEROUS",1,1324,180);
-        //
-        showFile.showAllFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\OUT_UIF\\COSU_UIF\\ExpectedComplete","REMARKS        011st vessel:",2,0,28);
+        showFile.showAllFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\IN_D99B\\IXORP-COSU\\ExpectedComplete","I/B DOOR",0,22,13);
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\youal@oocl.com","O/B DOOR",0,1,25);
     }
 
+    @Test
+    public void showAllEDIFileByPrefixAndLineAndPosition() throws Exception{
+        showFile.showAllEDIFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\IN_D99B\\DAKOSY-COSU\\InputData","FTX","'","\\+",100,1);
+//        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\youal@oocl.com","O/B DOOR",0,1,25);
+    }
 }
