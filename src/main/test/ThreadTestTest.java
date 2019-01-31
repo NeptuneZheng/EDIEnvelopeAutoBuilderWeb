@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class ThreadTestTest {
     @Test
     public void threadTest(){
@@ -18,6 +21,12 @@ public class ThreadTestTest {
             System.out.println(counter);
         }
         ThreadTest.stopService();
+    }
+
+    @Test
+    public void testDate(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        System.out.println(format.format(Calendar.getInstance().getTime()));
     }
 
 

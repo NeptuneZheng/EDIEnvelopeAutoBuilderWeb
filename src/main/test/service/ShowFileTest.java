@@ -18,13 +18,15 @@ public class ShowFileTest {
 
     @Test
     public void showAllFileByPrefixAndLineAndPosition() throws Exception{
-        showFile.showAllFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\IN_D99B\\IXORP-COSU\\ExpectedComplete","I/B DOOR",0,22,13);
+        String folder_path = "D:\\1_B2BEDI_Revamp\\BR\\OUT_UIF\\COSU_UIF\\ExpectedComplete";
+//        showFile.showAllFileByPrefixAndLineAndPosition(folder_path,"EXTERNAL REF",0,0,67,showFile.getShowFileList(folder_path,"CANCEL"));
+        showFile.showAllFileByPrefixAndLineAndPosition(folder_path,"INTERMODAL",0,153,11,null);
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\youal@oocl.com","O/B DOOR",0,1,25);
     }
 
     @Test
     public void showAllEDIFileByPrefixAndLineAndPosition() throws Exception{
-        showFile.showAllEDIFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\IN_D99B\\DAKOSY-COSU\\InputData","FTX","'","\\+",100,1);
+        showFile.showAllEDIFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\IN_300\\COSFREXM-COSU\\InputData","V1","~","\\*",1000,2);
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\youal@oocl.com","O/B DOOR",0,1,25);
     }
 }

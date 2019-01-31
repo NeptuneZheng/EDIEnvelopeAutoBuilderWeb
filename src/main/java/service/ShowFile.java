@@ -1,7 +1,9 @@
 package service;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShowFile {
@@ -93,9 +95,13 @@ public class ShowFile {
         }
     }
 
-    public void showAllFileByPrefixAndLineAndPosition(String folderPath, String prefix, int line,int start,int len) {
+    public void showAllFileByPrefixAndLineAndPosition(String folderPath, String prefix, int line,int start,int len,List<String> showFileLists) {
         BufferedReader bufferedReader = null;
         File fis = new File(folderPath);
+        boolean use_showFileLists = false;
+        if(showFileLists != null && showFileLists.size()>0 ){
+            use_showFileLists = true;
+        }
 
         for(File file : fis.listFiles()){
             int count = 1;
@@ -103,17 +109,18 @@ public class ShowFile {
                 System.out.println("Can't Analysis file folder !");
             }else if(file.isFile()){
                 String inputFileName = file.getName();
-//                System.out.println("File Name : "+inputFileName+"*****");
-//                if(line == 0){
-//                    System.out.println("File Name : "+inputFileName+"*****");
-//                }
+                if(use_showFileLists && !showFileLists.contains(inputFileName)){
+                    continue;
+                }
                 try {
                     bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
                     String lineTxt = null;
                     int c = 0;
+                    int d = 0;
                     int not_null_count = 0;
                     int total_count = 0;
                     while ((lineTxt = bufferedReader.readLine()) != null) {
+                        d++;
                         if(lineTxt.startsWith(prefix)){
                             String sub = lineTxt.substring(start,start+len);
                             c++;
@@ -122,7 +129,7 @@ public class ShowFile {
                                 if(sub.trim().length() > 2){
                                     not_null_count ++;
                                 }
-                                System.out.println(inputFileName+"~~~~~~~~~~~~~~~~~~~~~~~~~"+lineTxt);
+                                System.out.println(inputFileName+"~~~~~~~~~~~~~~~~~~~~~~~~~"+sub);
 //                            }else if(count == line && sub.trim().length() > 2){
                             }else if(count == line && !sub.trim().equals("")){
                                 //&& sub.trim().equals("DSP")  && !sub.trim().equals("")
@@ -138,6 +145,9 @@ public class ShowFile {
                             count++;
                         }
                     }
+//                    if(c == 0 && d > 7){
+//                        System.out.println(count+"-File Name : "+inputFileName);
+//                    }
 //                    if( not_null_count > 0 && total_count > 0 && !file.getName().endsWith("boxml")){
 //                        System.out.println(inputFileName+"~~~~~~~~~~~~~~~~~~~~~~~~~"+"(total_count: "+total_count+"),(not_null_count: "+not_null_count+")");
 //                    }
@@ -157,6 +167,45 @@ public class ShowFile {
                 continue;
             }
         }
+    }
+
+    public List<String> getShowFileList(String folderPath, String prefix) {
+        List<String> fileLists = new ArrayList<String>();
+        BufferedReader bufferedReader = null;
+        File fis = new File(folderPath);
+        for (File file : fis.listFiles()) {
+            if (file.isDirectory()) {
+                System.out.println("Can't Analysis file folder !");
+            } else if (file.isFile()) {
+                String inputFileName = file.getName();
+                try {
+                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+                    String lineTxt = null;
+                    int c = 0;
+                    int not_null_count = 0;
+                    int total_count = 0;
+                    while ((lineTxt = bufferedReader.readLine()) != null) {
+                        if (lineTxt.startsWith(prefix)) {
+                            fileLists.add(inputFileName);
+                        }
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                continue;
+            }
+        }
+        System.out.println("matach file name lists: " + fileLists);
+        return fileLists;
     }
 
     public void showAllEDIFileByPrefixAndLineAndPosition(String folderPath,String prefix, String seg_seperater,String field_seperater, int line,int position) {
