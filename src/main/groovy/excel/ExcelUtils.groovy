@@ -3,22 +3,44 @@ package excel
 import com.google.common.io.Files
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
 import org.apache.poi.ss.formula.functions.T
-import org.apache.poi.ss.usermodel.Row
-import org.apache.poi.ss.usermodel.Sheet
-import org.apache.poi.ss.usermodel.Workbook
+import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.streaming.SXSSFWorkbook
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 
-public abstract class ExcelUtils {
+public abstract class ExcelUtils{
     private static String EXCEL_XLS = '.xls'
     private static String EXCEL_XLSX = '.xlsx'
-    public void writeExcel(List<List<T>> rows, String sheetName, String filePath){
+    public synchronized void writeExcel(List<List<T>> rows, String sheetName, String filePath){
         Workbook workbook = getWrokbookWhenWrite(filePath)
-        Sheet sheet = workbook.createSheet(sheetName)
+        Sheet sheet = null
+        if(workbook.getSheet(sheetName)){
+            sheet = workbook.getSheet(sheetName)
+        }else{
+            workbook.createSheet(sheetName)
+        }
         rows?.eachWithIndex{ curr_row, curr_row_idx ->
-            Row row = sheet.createRow(curr_row_idx)
+            Row row = null
+            if(sheet.getRow(curr_row_idx)){
+                row = sheet.getRow(curr_row_idx)
+            }else{
+                row = sheet.createRow(curr_row_idx)
+            }
             curr_row?.eachWithIndex{ curr_cell, curr_cell_idx ->
-                row.createCell(curr_cell_idx).setCellValue(curr_cell?.toString())
+                CellStyle style = row.getRowStyle()
+                if (curr_cell instanceof Map) {
+                    row.createCell(curr_cell_idx).setCellValue(curr_cell.get('value') ? curr_cell.get('value').toString() : '')
+                    if (curr_cell.get('color')) {
+                        style = workbook.createCellStyle()
+                        style.setFillForegroundColor(curr_cell.get('color') as short)
+                        style.setFillPattern(FillPatternType.SOLID_FOREGROUND)
+                        row.getCell(curr_cell_idx).setCellStyle(style)
+                    } else {
+                        row.getCell(curr_cell_idx).setCellStyle(style)
+                    }
+                } else {
+                    row.createCell(curr_cell_idx).setCellValue(curr_cell.toString())
+                    row.getCell(curr_cell_idx).setCellStyle(style)
+                }
             }
         }
         createFile(filePath)
@@ -50,9 +72,9 @@ public abstract class ExcelUtils {
         return rows;
     }
 
-    public abstract void designExcel(Workbook workbook, String sheetName, int rows, File file)
+    public abstract void  designExcel(Workbook workbook, String sheetName, int rows, File file)
 
-    public   Workbook getWorkbookWhenRead(String filePath) throws IOException {
+    public  Workbook getWorkbookWhenRead(String filePath) throws IOException {
         File file = new File(filePath)
         createFile(filePath)
 
@@ -75,8 +97,10 @@ public abstract class ExcelUtils {
 
     public   Workbook getWrokbookWhenWrite(String filePath) throws IllegalArgumentException{
         Workbook workbook = null;
-
-        if(filePath.endsWith(EXCEL_XLS)) {
+        if(new File(filePath).isFile()){
+            workbook = getWorkbookWhenRead(filePath)
+        }
+        else if(filePath.endsWith(EXCEL_XLS)) {
             workbook = new SXSSFWorkbook(1000);
         }
         else if(filePath.endsWith(EXCEL_XLSX)) {
