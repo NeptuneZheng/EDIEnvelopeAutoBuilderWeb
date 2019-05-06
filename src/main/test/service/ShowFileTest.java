@@ -1,5 +1,4 @@
 package service;
-
 import org.junit.Test;
 
 public class ShowFileTest {
@@ -26,7 +25,8 @@ public class ShowFileTest {
 
     @Test
     public void showAllEDIFileByPrefixAndLineAndPosition() throws Exception{
-        showFile.showAllEDIFileByPrefixAndLineAndPosition("D:\\1_B2BEDI_Revamp\\BR\\IN_300\\COSFREXM-COSU\\InputData","V1","~","\\*",1000,2);
+        showFile.showAllEDIFileByPrefixAndLineAndPosition("C:\\Users\\ZHENGNE\\Desktop\\Support\\2019\\1","B4","~","\\*",20,3);
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\youal@oocl.com","O/B DOOR",0,1,25);
     }
+
 }

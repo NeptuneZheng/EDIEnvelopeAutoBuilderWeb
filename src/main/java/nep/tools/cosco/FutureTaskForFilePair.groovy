@@ -1,4 +1,4 @@
-package b2b.tools.cosco
+package nep.tools.cosco
 
 import com.google.common.io.Files
 

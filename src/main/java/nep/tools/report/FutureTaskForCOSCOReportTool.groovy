@@ -1,4 +1,4 @@
-package b2b.tools.report
+package nep.tools.report
 
 import org.apache.poi.ss.usermodel.IndexedColors
 
@@ -19,7 +19,7 @@ class FutureTaskForCOSCOReportTool {
             for(int j = 0; j < 20; j++){
                 Map<String,Object> map = new HashMap<>()
                 if(i == j){
-                    map.put('color', IndexedColors.PINK.getIndex())
+                    map.put('color', IndexedColors.YELLOW.getIndex())
                 }
                 map.put('value', "${i}-${j}")
                 subList.add(map)

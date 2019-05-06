@@ -1,4 +1,4 @@
-package b2b.tools.cosco
+package nep.tools.cosco
 
 import java.util.concurrent.Callable
 import java.util.regex.Matcher
@@ -86,6 +86,6 @@ class CallableFilePair implements Callable<Map<String,List<String>>> {
 
     public static void main(String[] args){
         CallableFilePair filePair = new CallableFilePair()
-        println(filePair.getBKGNoMap("D:\\1_B2BEDI_Revamp\\BC\\OUT_D96B\\IKEA-COSU\\resource\\COSU-OUTPUT\\IKEA","\\+BN:(.*?)'"))
+        println(filePair.getBKGNoMap("D:\\1_B2BEDI_Revamp\\BC\\OUT_D96B\\IKEA-COSU\\resource\\CS2XML\\V2\\C\\CS2XML","<CarrierBookingNumber>(.*?)</CarrierBookingNumber>"))
     }
 }
