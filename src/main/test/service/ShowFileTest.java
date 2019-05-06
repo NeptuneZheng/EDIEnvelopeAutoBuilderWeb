@@ -25,7 +25,7 @@ public class ShowFileTest {
 
     @Test
     public void showAllEDIFileByPrefixAndLineAndPosition() throws Exception{
-        showFile.showAllEDIFileByPrefixAndLineAndPosition("C:\\Users\\ZHENGNE\\Desktop\\Support\\2019\\1","B4","~","\\*",20,3);
+        showFile.showAllEDIFileByPrefixAndLineAndPosition("C:\\Users\\ZHENGNE\\Desktop\\Support\\2019\\DL-20190506111101","B4","~","\\*",20,3);
 //        showFile.showAllFileByPrefixAndLineAndPosition("D:\\My Documents\\MyJabberFiles\\youal@oocl.com","O/B DOOR",0,1,25);
     }
 

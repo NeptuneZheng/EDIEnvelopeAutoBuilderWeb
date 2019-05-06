@@ -122,7 +122,15 @@ class AlgorithmUtils {
         while (row_len > 0 || column_len > 0){
             Cell row_cell
             Cell column_cell
-            if(row[row_len - 1] == column[column_len - 1]){
+            if(row_len == 0){
+                row_cell = new Cell(row_len,column_len,null,solution[row_len][column_len - 1])
+                column_cell = new Cell(row_len,column_len,column[column_len - 1],solution[row_len][column_len - 1])
+                column_len--
+            }else if(column_len == 0){
+                row_cell = new Cell(row_len,column_len,row[row_len - 1],solution[row_len - 1][column_len])
+                column_cell = new Cell(row_len,column_len,null,solution[row_len - 1][column_len])
+                row_len--
+            }else if(row[row_len - 1] == column[column_len - 1]){
                 row_cell = new Cell(row_len,column_len,row[row_len - 1],solution[row_len][column_len])
                 column_cell = new Cell(row_len,column_len,column[column_len - 1],solution[row_len][column_len])
                 row_len--
@@ -145,6 +153,8 @@ class AlgorithmUtils {
                     column_len--
                 }
             }
+
+
 
             row_cells.add(row_cell)
             column_cells.add(column_cell)
@@ -170,8 +180,8 @@ class AlgorithmUtils {
 
 
     public static void main(String[] args) {
-        String[] a = "aebddscssdd".toCharArray()
-        String[] b = "cabccddfg".toCharArray()
+        String[] a = "cabccddfg".toCharArray()
+        String[] b = "aebddscssdd".toCharArray()
 
         AlgorithmUtils algorithmUtils = new AlgorithmUtils()
 
