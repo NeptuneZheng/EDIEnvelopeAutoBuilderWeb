@@ -233,6 +233,7 @@ public class ShowFile {
                         String[] segment_arrs = lineTxt.split(seg_seperater);
                         for(String segment : segment_arrs){
                             if(segment.startsWith(prefix)){
+                                total_count ++;
                                 String[] field_arrs = segment.split(field_seperater);
                                 if(position == 0){
                                     System.out.println(inputFileName+"~~~~~~~~~~~~~~~~~~~~~~~~~"+segment);
@@ -247,6 +248,10 @@ public class ShowFile {
                             }
                         }
                     }
+//                    if(total_count < 1){
+//                        System.out.println("==============");
+//                        System.exit(1);
+//                    }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

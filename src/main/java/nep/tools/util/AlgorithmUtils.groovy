@@ -16,7 +16,7 @@ class AlgorithmUtils {
     static ArrayUtils utils = new ArrayUtils()
 
 
-    private void dataCheck(Object[] row, Object[] column){
+    protected void dataCheck(Object[] row, Object[] column){
         if(row == null || column == null){
             throw new RuntimeException("AlgorithmUtils request analysis array size must greater than 0")
         }
@@ -33,19 +33,6 @@ class AlgorithmUtils {
         return min
     }
 
-    public  double SimilityOfArray(Object[] row, Object[] column){
-        dataCheck(row, column)
-
-        double simility = 0
-        if(row.toString() == column.toString()){
-            simility = 1
-        }else {
-            simility = 1 - (double)(LevenshteinDistance(row,column)/(Math.max(row.length,column.length)))
-        }
-
-        return new BigDecimal(simility).setScale(3,BigDecimal.ROUND_HALF_UP)
-    }
-
     public  int LevenshteinDistance(Object[] row, Object[] column){
         dataCheck(row, column)
 
@@ -54,7 +41,7 @@ class AlgorithmUtils {
         for(int i = 0; i <= row.length ; i++){
             diff[i][0] = i
         }
-        for(int j = 0; j <= row.length ; j++){
+        for(int j = 0; j <= column.length ; j++){
             diff[0][j] = j
         }
 
@@ -70,7 +57,7 @@ class AlgorithmUtils {
             }
         }
 
-        println(utils.arrayToString((Integer[][])diff))
+//        println(utils.arrayToString((Integer[][])diff))
 
         return diff[row.length][column.length]
     }
@@ -92,10 +79,6 @@ class AlgorithmUtils {
         int score = 0
         for(int i = 1 ; i <= row_len; i++){
             for(int j = 1; j <= column_len; j++){
-                //fix 'abccdd' fit 'aebddsc' max = 3 issue
-//                int row_find_column = utils.countCommonValueofArrays(utils.copyArray(row,0,i+1),utils.copyArray(column,0,j+1))
-//                int column_find_row = utils.countCommonValueofArrays(utils.copyArray(column,0,j+1),utils.copyArray(row,0,i+1))
-//                cells[i+1][j+1] = Math.max(row_find_column,column_find_row)
                 if(row[i -1] == column[j - 1]){
                     cells[i][j] = cells[i - 1][j - 1] + 1
                 }else{
@@ -104,14 +87,14 @@ class AlgorithmUtils {
             }
         }
 
-        println(utils.arrayToString(cells))
+//        println(utils.arrayToString(cells))
         return cells
     }
 
     public Object[][] NeedlemanWunschOptimumSolution(Object[] row, Object[] column){
         Object[][] result = new Object[2]
 
-        Integer[][] solution = NeedlemanWunsch(row,column)
+        Integer[][] solution = this.NeedlemanWunsch(row,column)
 
         List<Cell> row_cells = new ArrayList<>()
         List<Cell> column_cells = new ArrayList<>()
